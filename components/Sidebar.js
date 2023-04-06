@@ -36,11 +36,20 @@ function Sidebar() {
         ">
         Tweet
         </button>
-        <div>
-            <img src="/unnamed.png"/>
+        <div className='text-[#d9d9d9] flex items-center
+        justify-center hoverAnimation xl:ml-auto xl:-mr-5 mt-auto'>
+            <img src="/unnamed.png" alt=''
+            className='h-10 w-10 rounded-full xl:mr-2.5'
+            />
+            <div className='hidden xl:inline leading-5'>
+                <h4 className='font-bold'>Seth Dimmer</h4>
+                <p className='text-[#6e767d]'>@lessgo2000</p>
+            </div>
+            <DotsHorizontalIcon className="h-5 hidden xl:inline ml-10" 
+            />
         </div>
     </div>
-  )// props are active,Icon ,and text
+  );// props are active,Icon ,and text
 }
 
 export default Sidebar
