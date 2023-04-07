@@ -1,12 +1,16 @@
-import { PhotographIcon } from "@heroicons/react/outline";
+import { CalendarIcon, ChartBarIcon, EmojiHappyIcon, PhotographIcon } from "@heroicons/react/outline";
 import { XIcon } from "@heroicons/react/solid";
 import { useRef } from "react";
 import { useState } from "react"
+import data from '@emoji-mart/data'
+import Picker from '@emoji-mart/react'
+
 
 function input() {
     const [input,setInput] = useState("");
     const [selectedFile, setSelectedFile] = useState(null);// by default null
     // as soon as i select a file the image is put inside of a piece of state called selectedFile
+    const [showEmojis,setShowEmojis] = useState(false)
     const filePickerRef = useRef(null)
 
     const addImageToPost = () => {};
@@ -48,17 +52,45 @@ function input() {
         </div>
 
             <div className="flex items-center justify-between pt-2.5">
-                <div className="flex items-center">
+                <div className="flex items-center ">
                     <div className="icon"
                     onClick={() => filePickerRef.
                     current.click()}>{/*the current event of when i click the icon the event occurs */}
                         <PhotographIcon className="h-[22px] text-[#1d9bf0]"/>
                         <input type="file" onChange={addImageToPost} ref=
-                        {filePickerRef} hidden/>
+                        {filePickerRef} hidden
+                        />
                         {/* useRef hook to create references i am providing(pointing) a ref to the input field i want to have the reference basically click the icon */}
                     </div>
-                </div>
+
+                    <div className="icon rotate-90">
+                <ChartBarIcon className="text-[#1d9bf0] h-[22px]" />
+              </div>
+
+              <div className="icon" onClick={() => setShowEmojis
+                (!showEmojis)}>
+                <EmojiHappyIcon className="text-[#1d9bf0] h-[22px]" />
+              </div>
+
+              <div className="icon">
+                <CalendarIcon className="text-[#1d9bf0] h-[22px]" />
+              </div>
+
+              {showEmojis &&(
+               <Picker
+            //    onSelect={addEmoji}
+               style={{
+                 position: "absolute",
+                 marginTop: "465px",
+                 marginLeft: -40,
+                 maxWidth: "320px",
+                 borderRadius: "20px",
+               }}
+               theme="dark"
+             />
+              )}
             </div>
+         </div>
      </div>
   </div>
   )

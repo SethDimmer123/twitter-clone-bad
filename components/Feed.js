@@ -2,6 +2,7 @@ import { SparklesIcon } from '@heroicons/react/outline';
 import React from 'react'
 import Input from './input.js';
 
+
 function Feed() {
     //   flex-grow lets me take as much space as possible for middle(feed component)
   return (
