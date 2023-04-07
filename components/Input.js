@@ -1,10 +1,15 @@
+import { PhotographIcon } from "@heroicons/react/outline";
 import { XIcon } from "@heroicons/react/solid";
+import { useRef } from "react";
 import { useState } from "react"
 
 function input() {
     const [input,setInput] = useState("");
-    const [selectedFile, setSelectedFile] = useState(null)// by default null
+    const [selectedFile, setSelectedFile] = useState(null);// by default null
     // as soon as i select a file the image is put inside of a piece of state called selectedFile
+    const filePickerRef = useRef(null)
+
+    const addImageToPost = () => {};
   return (
   <div className={`border-b border-gray-700 p-3 flex space-x-3
   overflow-y-scroll`}>{/**use gap-x-3 to see how many pixels */}
@@ -41,6 +46,19 @@ function input() {
             </div>
             )}
         </div>
+
+            <div className="flex items-center justify-between pt-2.5">
+                <div className="flex items-center">
+                    <div className="icon"
+                    onClick={() => filePickerRef.
+                    current.click()}>{/*the current event of when i click the icon the event occurs */}
+                        <PhotographIcon className="h-[22px] text-[#1d9bf0]"/>
+                        <input type="file" onChange={addImageToPost} ref=
+                        {filePickerRef} hidden/>
+                        {/* useRef hook to create references i am providing(pointing) a ref to the input field i want to have the reference basically click the icon */}
+                    </div>
+                </div>
+            </div>
      </div>
   </div>
   )
