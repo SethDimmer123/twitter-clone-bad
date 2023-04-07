@@ -20,7 +20,7 @@ function Sidebar() {
       {/* when using position fixed or sticky i always have to give the top value */}
         <div className='flex items-center justify-center w-14 h-14 
         hoverAnimation p-0 xl:ml-24'>
-            <Image src="/twitter-logo-5.png" width={30} height={30}/>
+            <Image src="/twitter-logo-5.png" width={30} height={30} alt=''/>
         </div>
         <div className='space-y-2.5 mt-4 mb-2.5 xl:ml-24'>
         <SidebarLink text="Home" Icon={HomeIcon} active />

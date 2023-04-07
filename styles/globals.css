@@ -21,4 +21,11 @@
     hover:bg-opacity-10 flex items-center justify-center
     rounded-full transition ease-out;
   }
+
+  /* em-emoji-picker{
+    position: absolute;
+    margin-top: 20px;
+    margin-left: -190px;
+    max-width: 320px;
+  } */
 }
