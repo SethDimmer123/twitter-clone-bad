@@ -1,6 +1,6 @@
 import { SparklesIcon } from '@heroicons/react/outline';
 import React from 'react'
-import Input from './input.js';
+import Input from '../components/Input';
 
 
 function Feed() {

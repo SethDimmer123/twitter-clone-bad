@@ -2,7 +2,6 @@ import { CalendarIcon, ChartBarIcon, EmojiHappyIcon, PhotographIcon } from "@her
 import { XIcon } from "@heroicons/react/solid";
 import { useRef } from "react";
 import { useState } from "react"
-import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
 
 
@@ -77,15 +76,8 @@ function input() {
               </div>
 
               {showEmojis &&(
-               <Picker
-            //    onSelect={addEmoji}
-               style={{
-                 position: "absolute",
-                 marginTop: "465px",
-                 marginLeft: -40,
-                 maxWidth: "320px",
-                 borderRadius: "20px",
-               }}
+               <Picker 
+                //    onSelect={addEmoji}
                theme="dark"
              />
               )}
