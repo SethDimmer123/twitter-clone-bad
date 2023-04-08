@@ -13,6 +13,16 @@ function input() {
     const filePickerRef = useRef(null)
 
     const addImageToPost = () => {};
+
+    const addEmoji = (e) => {
+      let sym = e.unified.split("-");
+      let codesArray = [];
+      sym.forEach((el) => codesArray.push("0x" + el));
+      let emoji = String.fromCodePoint(...codesArray);
+      setInput(input + emoji);
+    };
+
+
   return (
   <div className={`border-b border-gray-700 p-3 flex space-x-3
   overflow-y-scroll`}>{/**use gap-x-3 to see how many pixels */}
@@ -22,7 +32,10 @@ function input() {
      />
      <div className="w-full divide-y divide-gray-700">
         {/* divide-y creates a line between the children */}
-        <div className={``}>
+        
+        {/* space increases when typing in input */}
+        <div className={`${selectedFile && "pb-7"} ${input &&
+        "space-y-2.5"}`}>
             <textarea 
             value={input} 
             onChange={(e) => setInput(e.target.value)}//now i can type anything i want
@@ -77,11 +90,20 @@ function input() {
 
               {showEmojis &&(
                <Picker 
-                //    onSelect={addEmoji}
+                   onEmojiSelect={addEmoji}
                theme="dark"
              />
               )}
             </div>
+            <button className="bg-[#1d9bf0] text-white 
+            rounded-full px-4 py-1.5 font-bold 
+            shadow-md hover:bg-[#1a8cd8] disabled:hover:bg-[#1d9bf0] 
+            disabled:opacity-50 disabled:cursor-default"
+             disabled={!input.trim() && !selectedFile}
+            //  onClick={sendPost}
+             >
+              Tweet
+            </button>
          </div>
      </div>
   </div>
