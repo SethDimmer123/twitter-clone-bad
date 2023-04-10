@@ -37,14 +37,15 @@ export async function getServerSideProps(context) {
   );
   const providers = await getProviders();
   console.log(providers)
-  const session = await getSession(context);
+  const session = await getSession(context);// get rid of flickering of login page
 
   return {
     props: {
       trendingResults,
       followResults,
       providers,
-      // session,
+      session,
+      //prevents flickering of login (in react app)
     },
   };
 }
