@@ -3,6 +3,19 @@ import { XIcon } from "@heroicons/react/solid";
 import { useRef } from "react";
 import { useState } from "react"
 import Picker from '@emoji-mart/react'
+import { db, storage } from "../firebase";
+import {
+  addDoc,
+  collection,
+  doc,
+  serverTimestamp,
+  updateDoc,
+} from "@firebase/firestore";
+import { getDownloadURL, ref, uploadString } from "@firebase/storage";
+// FIREBASE VERSION 9
+// NEXT AUTHENTICATION NOT FIREBASE AUTHENTICATION
+// GOOGLE ENABLED
+
 
 
 function input() {
@@ -13,14 +26,45 @@ function input() {
     const [loading, setLoading] = useState(false)
     const filePickerRef = useRef(null);
 
-    const sendPost = () => {
+    const sendPost = async() => {
       if(loading) return;
       setLoading(true);
 
-      // const docRef
-    }
+      const docRef = await addDoc(collection(db, 'posts'),{
+        // id: session.user.uid,
+        // username: session.user.name,
+        // userImg: session.user.image,
+        // tag: session.user.tag,
+        text: input,
+        timestamp: serverTimestamp(),
+      });
 
-    const addImageToPost = () => {};
+      const imageRef = ref(storage, `posts/${docRef.id}/image`);
+
+      if(selectedFile) {
+        await uploadString(imageRef,selectedFile, "data_url").then(async () => {
+          const getDownloadURL = await getDownloadURL(imageRef)
+          await updateDoc(doc(db,"posts",docRef.id),{
+            image: getDownloadURL,
+          });
+        });
+      }
+    setLoading(false);
+    setInput("");
+    setSelectedFile(null);
+    setShowEmojis(false);
+    };
+    // whenever using await need to use an asynchronus function
+    const addImageToPost = (e) => {
+      const reader = new FileReader();
+      if(e.target.files[0]) {
+        reader.readAsDataURL(e.target.files[0]);
+      }
+
+      reader.onload = (readerEvent) => {
+        setSelectedFile(readerEvent.target.result);
+      };
+    };
 
     const addEmoji = (e) => {
       let sym = e.unified.split("-");
@@ -35,7 +79,8 @@ function input() {
 
   return (
   <div className={`border-b border-gray-700 p-3 flex space-x-3
-  overflow-y-scroll`}>{/**use gap-x-3 to see how many pixels */}
+  overflow-y-scroll ${loading && "opacity-60"}`}>{/**when loading is true i want opacity of my input to 0.6  */}
+    {/**use gap-x-3 to see how many pixels */}
       <img src="/unnamed.png"                         
     alt=""
      className='h-11 w-11 rounded-full cursor-pointer'
@@ -72,7 +117,8 @@ function input() {
             </div>
             )}
         </div>
-
+        {!loading && (
+          // if loading is not true do not show tweet the button
             <div className="flex items-center justify-between pt-2.5">
                 <div className="flex items-center ">
                     <div className="icon"
@@ -115,9 +161,10 @@ function input() {
               Tweet
             </button>
          </div>
+        )}
      </div>
   </div>
-  )
+  );
 }
 
 export default input
