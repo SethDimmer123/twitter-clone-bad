@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Sidebar from '../components/Sidebar'
 import Feed from '../components/Feed'
 import { getProviders, getSession, useSession } from "next-auth/react";
+import Login from '../components/Login';
 
 export default function Home({ trendingResults, followResults, providers }) {
   const {data: session} = useSession();
@@ -28,7 +29,7 @@ export default function Home({ trendingResults, followResults, providers }) {
 }
 
 export async function getServerSideProps(context) {
-  const trendingResults = await fetch("https://jsonkeeper.com/b/NKEV").then(//api endpoint
+  const trendingResults = await fetch("https://www.jsonkeeper.com/b/NKEV").then(//api endpoint
     (res) => res.json()
   );
   const followResults = await fetch("https://jsonkeeper.com/b/WWMJ").then(//api endpoint
@@ -43,7 +44,7 @@ export async function getServerSideProps(context) {
       trendingResults,
       followResults,
       providers,
-      session,
+      // session,
     },
   };
 }
