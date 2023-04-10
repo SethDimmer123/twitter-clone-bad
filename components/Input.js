@@ -10,7 +10,15 @@ function input() {
     const [selectedFile, setSelectedFile] = useState(null);// by default null
     // as soon as i select a file the image is put inside of a piece of state called selectedFile
     const [showEmojis,setShowEmojis] = useState(false)
-    const filePickerRef = useRef(null)
+    const [loading, setLoading] = useState(false)
+    const filePickerRef = useRef(null);
+
+    const sendPost = () => {
+      if(loading) return;
+      setLoading(true);
+
+      // const docRef
+    }
 
     const addImageToPost = () => {};
 
@@ -21,6 +29,8 @@ function input() {
       let emoji = String.fromCodePoint(...codesArray);
       setInput(input + emoji);
     };
+
+
 
 
   return (
@@ -100,7 +110,7 @@ function input() {
             shadow-md hover:bg-[#1a8cd8] disabled:hover:bg-[#1d9bf0] 
             disabled:opacity-50 disabled:cursor-default"
              disabled={!input.trim() && !selectedFile}
-            //  onClick={sendPost}
+             onClick={sendPost}
              >
               Tweet
             </button>
