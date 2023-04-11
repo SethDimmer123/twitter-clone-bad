@@ -1,7 +1,10 @@
-import { CalendarIcon, ChartBarIcon, EmojiHappyIcon, PhotographIcon } from "@heroicons/react/outline";
+import { 
+  CalendarIcon, 
+  ChartBarIcon, 
+  EmojiHappyIcon, 
+  PhotographIcon } from "@heroicons/react/outline";
 import { XIcon } from "@heroicons/react/solid";
-import { useRef } from "react";
-import { useState } from "react"
+import { useRef,useState } from "react";
 import Picker from '@emoji-mart/react'
 import { db, storage } from "../firebase";
 import {
@@ -10,6 +13,7 @@ import {
   doc,
   serverTimestamp,
   updateDoc,
+  
 } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "@firebase/storage";
 // FIREBASE VERSION 9
