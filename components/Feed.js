@@ -1,9 +1,41 @@
 import { SparklesIcon } from '@heroicons/react/outline';
 import React from 'react'
 import Input from '../components/Input';
+import { useState,useEffect } from "react";
+import { onSnapshot, collection, query, orderBy } from "@firebase/firestore";
+import { db } from "../firebase";
+import Post from "./Post";
+import { useSession } from "next-auth/react";
 
 
 function Feed() {
+  const [posts,setPosts] = useState([]);
+    // MESSY
+  useEffect(() => {// retrieving my posts
+    const unsubscribe = onSnapshot(// snapshot function from firestore
+      query(collection(db, "posts"), orderBy("timestamp", "desc")),
+      (snapshot) => {//database
+        setPosts(snapshot.docs);
+      }
+    );
+
+    return () => {
+      unsubscribe();
+    };
+  }, [db]);
+
+  // CLEAN
+  useEffect(
+    () =>
+      onSnapshot(
+        query(collection(db, "posts"), orderBy("timestamp", "desc")),
+        (snapshot) => {
+          setPosts(snapshot.docs);
+        }
+      ),
+    [db]
+  );
+
     //   flex-grow lets me take as much space as possible for middle(feed component)
   return (
   <div className='text-white flex-grow border-l border-r
@@ -19,8 +51,11 @@ function Feed() {
         </div>  
     </div>
 
-
     <Input />
+    {/* rendering all posts */}
+    <div className='pb-72'>
+
+    </div>
   </div>
   );
 }
