@@ -11,7 +11,7 @@
     "@emoji-mart/react": "^1.1.1",
     "@heroicons/react": "1.0.0",
     "firebase": "^9.19.1",
-    "next": "13.2.4",
+    "next": "latest",
     "next-auth": "^4.22.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"

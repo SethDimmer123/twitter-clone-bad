@@ -13,13 +13,12 @@ import {
   doc,
   serverTimestamp,
   updateDoc,
-  
 } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "@firebase/storage";
+import { useSession } from 'next-auth/react';
 // FIREBASE VERSION 9
 // NEXT AUTHENTICATION NOT FIREBASE AUTHENTICATION
 // GOOGLE ENABLED
-import { useSession } from 'next-auth/react';
 
 
 
@@ -36,7 +35,7 @@ function input() {
       if(loading) return;
       setLoading(true);
 
-      const docRef = await addDoc(collection(db, 'posts'),{
+      const docRef = await addDoc(collection(db, 'posts'), {
         id: session.user.uid,
         username: session.user.name,
         userImg: session.user.image,

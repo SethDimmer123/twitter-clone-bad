@@ -4,7 +4,7 @@ import Input from '../components/Input';
 import { useState,useEffect } from "react";
 import { onSnapshot, collection, query, orderBy } from "@firebase/firestore";
 import { db } from "../firebase";
-import Post from "./Post";
+import Post from "../components/Post";
 import { useSession } from "next-auth/react";
 
 
