@@ -11,18 +11,18 @@ import { useSession } from "next-auth/react";
 function Feed() {
   const [posts,setPosts] = useState([]);
     // MESSY
-  useEffect(() => {// retrieving my posts
-    const unsubscribe = onSnapshot(// snapshot function from firestore
-      query(collection(db, "posts"), orderBy("timestamp", "desc")),
-      (snapshot) => {//database
-        setPosts(snapshot.docs);
-      }
-    );
+  // useEffect(() => {// retrieving my posts
+  //   const unsubscribe = onSnapshot(// snapshot function from firestore
+  //     query(collection(db, "posts"), orderBy("timestamp", "desc")),
+  //     (snapshot) => {//database
+  //       setPosts(snapshot.docs);
+  //     }
+  //   );
 
-    return () => {
-      unsubscribe();
-    };
-  }, [db]);
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, [db]);
 
   // CLEAN
   useEffect(
@@ -35,6 +35,8 @@ function Feed() {
       ),
     [db]
   );
+
+  console.log(posts);
 
     //   flex-grow lets me take as much space as possible for middle(feed component)
   return (
@@ -54,7 +56,9 @@ function Feed() {
     <Input />
     {/* rendering all posts */}
     <div className='pb-72'>
-
+      {posts.map(post => (
+        <Post key={post.id} id={post.id} post={post.data()}/>
+      ))}
     </div>
   </div>
   );
