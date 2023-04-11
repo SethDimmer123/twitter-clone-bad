@@ -15,6 +15,7 @@ import { getDownloadURL, ref, uploadString } from "@firebase/storage";
 // FIREBASE VERSION 9
 // NEXT AUTHENTICATION NOT FIREBASE AUTHENTICATION
 // GOOGLE ENABLED
+import { useSession } from 'next-auth/react';
 
 
 
@@ -25,16 +26,17 @@ function input() {
     const [showEmojis,setShowEmojis] = useState(false)
     const [loading, setLoading] = useState(false)
     const filePickerRef = useRef(null);
+    const {data: session} = useSession();
 
     const sendPost = async() => {
       if(loading) return;
       setLoading(true);
 
       const docRef = await addDoc(collection(db, 'posts'),{
-        // id: session.user.uid,
-        // username: session.user.name,
-        // userImg: session.user.image,
-        // tag: session.user.tag,
+        id: session.user.uid,
+        username: session.user.name,
+        userImg: session.user.image,
+        tag: session.user.tag,
         text: input,
         timestamp: serverTimestamp(),
       });
@@ -81,7 +83,7 @@ function input() {
   <div className={`border-b border-gray-700 p-3 flex space-x-3
   overflow-y-scroll ${loading && "opacity-60"}`}>{/**when loading is true i want opacity of my input to 0.6  */}
     {/**use gap-x-3 to see how many pixels */}
-      <img src="/unnamed.png"                         
+      <img src={session.user.image}                         
     alt=""
      className='h-11 w-11 rounded-full cursor-pointer'
      />
