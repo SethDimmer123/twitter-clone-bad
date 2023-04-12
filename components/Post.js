@@ -41,10 +41,10 @@ function Post ({ id, post, postPage }) {
   const router = useRouter()
   return (
     <div className="p-3 flex cursor-pointer border-b border-gray-700"
+    onClick={() => router.push(`/${id}`)}
     >
       {!postPage && (
         <img src={post?.userImg} alt="" className="h-11 w-11 rounded-full mr-4"
-        onClick={() => router.push(`/${id}`)}
         />
       )}
       <div className="flex flex-col space-y-2 w-full">
@@ -90,7 +90,9 @@ function Post ({ id, post, postPage }) {
           <div
             className="flex items-center space-x-1 group"
             onClick={(e) => {
-              e.stopPropagation();//
+              e.stopPropagation();//prevents me from routing to a onclick 
+              // routing when i di not have stop propagation ona button
+              //  i will route to a new page.LIKE ICON AND CHAT ICON I HAVE STOP PROPOGATION
               setPostId(id);//setted this globally
               setIsOpen(true);//modalState
             }}
