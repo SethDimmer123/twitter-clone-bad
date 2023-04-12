@@ -25,7 +25,7 @@ function Feed() {
   // }, [db]);
 
   // CLEAN
-  useEffect(
+  useEffect(//just fetched posts
     () =>
       onSnapshot(
         query(collection(db, "posts"), orderBy("timestamp", "desc")),

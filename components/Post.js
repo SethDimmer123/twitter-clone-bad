@@ -1,3 +1,4 @@
+// most difficult component of the entire twitter bulid
 import {
   collection,
   deleteDoc,
@@ -38,7 +39,27 @@ function Post ({ id, post, postPage }) {
   // imported the userecoilState 
   // and the modalState from the modal Atom and recoil. 
   const [comments, setComments] = useState([])
-  const router = useRouter()
+  const [likes,setLikes] = useState([]);
+  const [liked,setLiked] = useState(false);
+  const router = useRouter();
+
+  useEffect(
+    () => 
+    setLiked(likes.findIndex((like) => like.id === session?.user?.uid) ==! -1
+  ), 
+  [likes]
+  );
+
+  const likePost = async () => {
+    if(liked) {
+      await deleteDoc(doc(db,"posts",id,"likes",session.user.uid))
+    }
+    else{
+      await setDoc(doc(db,"posts",id,"likes",session.user.uid), {
+        username:session.user.name
+      })//once already liked to know if i already set liked i use a useEffect becasue by default setLiked is false.
+    }
+  }
   return (
     <div className="p-3 flex cursor-pointer border-b border-gray-700"
     onClick={() => router.push(`/${id}`)}
@@ -91,8 +112,9 @@ function Post ({ id, post, postPage }) {
             className="flex items-center space-x-1 group"
             onClick={(e) => {
               e.stopPropagation();//prevents me from routing to a onclick 
-              // routing when i di not have stop propagation ona button
-              //  i will route to a new page.LIKE ICON AND CHAT ICON I HAVE STOP PROPOGATION
+              // routing when i do not have stop propagation on a button
+              //  i will route to a new page
+              // LIKE ICON AND CHAT ICON I HAVE STOP PROPOGATION
               setPostId(id);//setted this globally
               setIsOpen(true);//modalState
             }}
@@ -101,26 +123,28 @@ function Post ({ id, post, postPage }) {
               <ChatIcon className="h-5 group-hover:text-[#1d9bf0]" />
             </div>
             {comments.length > 0 && (
+              //if there is a single reply the comment number shows up
               <span className="group-hover:text-[#1d9bf0] text-sm">
                 {comments.length}
               </span>
             )}
           </div>
-            {/*  */}
-          {session.user.uid === post?.id ? (
+          {session.user.uid === post?.id ? (//only users can delete their own posts
             <div
               className="flex items-center space-x-1 group"
               onClick={(e) => {
                 e.stopPropagation();
-                deleteDoc(doc(db, "posts", id));
-                router.push("/");
+                deleteDoc(doc(db, "posts", id));// go into(firebase) my database then posts folder with the id of the post i want to delete
+                router.push("/");//when deleting my own post (user post) i want to reroute back to my home page
               }}
             >
               <div className="icon group-hover:bg-red-600/10">
                 <TrashIcon className="h-5 group-hover:text-red-600" />
               </div>
             </div>
-          ) : (
+          ) : (// this icon below will show up only if the post is 
+          // not of that particular user but some elses post then the switch 
+          // horizontal i con below will show up.
             <div className="flex items-center space-x-1 group">
               <div className="icon group-hover:bg-green-500/10">
                 <SwitchHorizontalIcon className="h-5 group-hover:text-green-500" />
@@ -128,21 +152,21 @@ function Post ({ id, post, postPage }) {
             </div>
           )}
 
-          {/* <div
+          <div
             className="flex items-center space-x-1 group"
             onClick={(e) => {
               e.stopPropagation();
-              likePost();
+              likePost();// when clicked this function is activated
             }}
           >
             <div className="icon group-hover:bg-pink-600/10">
-              {liked ? (
+              {liked ? (//if liked the this icon will show otherwise the unfilled heart icon shows.
                 <HeartIconFilled className="h-5 text-pink-600" />
               ) : (
                 <HeartIcon className="h-5 group-hover:text-pink-600" />
               )}
             </div>
-            {likes.length > 0 && (
+            {likes.length > 0 && (//if likes i greater than 0 display the likes
               <span
                 className={`group-hover:text-pink-600 text-sm ${
                   liked && "text-pink-600"
@@ -151,7 +175,7 @@ function Post ({ id, post, postPage }) {
                 {likes.length}
               </span>
             )}
-          </div> */}
+          </div>
 
           <div className="icon group">
             <ShareIcon className="h-5 group-hover:text-[#1d9bf0]" />
