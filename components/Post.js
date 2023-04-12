@@ -38,10 +38,13 @@ function Post ({ id, post, postPage }) {
   // imported the userecoilState 
   // and the modalState from the modal Atom and recoil. 
   const [comments, setComments] = useState([])
+  const router = useRouter()
   return (
-    <div className="p-3 flex cursor-pointer border-b border-gray-700">
+    <div className="p-3 flex cursor-pointer border-b border-gray-700"
+    >
       {!postPage && (
         <img src={post?.userImg} alt="" className="h-11 w-11 rounded-full mr-4"
+        onClick={() => router.push(`/${id}`)}
         />
       )}
       <div className="flex flex-col space-y-2 w-full">
@@ -87,7 +90,7 @@ function Post ({ id, post, postPage }) {
           <div
             className="flex items-center space-x-1 group"
             onClick={(e) => {
-              e.stopPropagation();
+              e.stopPropagation();//
               setPostId(id);//setted this globally
               setIsOpen(true);//modalState
             }}
