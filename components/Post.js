@@ -43,17 +43,25 @@ function Post ({ id, post, postPage }) {
   const [liked,setLiked] = useState(false);
   const router = useRouter();
 
+  useEffect(() => 
+  onSnapshot(collection(db, "posts",id, "likes"), (snapshot) => 
+  setLikes(snapshot.docs)
+  ),[db,id]//dependencies 2 whenever there is something outside the useEffect i include the dependencies.
+  );
+
   useEffect(
     () => 
-    setLiked(likes.findIndex((like) => like.id === session?.user?.uid) ==! -1
-  ), 
+    setLiked(//setting my likes inside the useEffect
+      likes.findIndex((like) => like.id === session?.user?.uid) ==! -1
+  ), //finding the index and getting 1 like and checking like ID if it matches the session.user.id
+  // and RETURNS AS TRUE INSTEAD OF FALSE.
   [likes]
   );
 
   const likePost = async () => {
-    if(liked) {
+    if(liked) {// IF LIKE IS TRUE 
       await deleteDoc(doc(db,"posts",id,"likes",session.user.uid))
-    }
+    }//THEN I WILL DELETE DOCUMENT because i already created a collection
     else{
       await setDoc(doc(db,"posts",id,"likes",session.user.uid), {
         username:session.user.name
@@ -85,7 +93,8 @@ function Post ({ id, post, postPage }) {
             </div>{" "}{/**spacing using js */}
             ·{" "}
             <span className="hover:underline text-sm sm:text-[15px]">
-            {/* <Moment fromNow>{post?.timestamp?.toDate()}</Moment> */}
+            <Moment fromNow>{post?.timestamp?.toDate()}</Moment>
+             {/* moment js timestamps */}
             </span>
             {!postPage && (
               <p className="text-[#d9d9d9] text-[15px] sm:text-base mt-0.5">{post?.text}</p>
