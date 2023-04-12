@@ -1,5 +1,6 @@
 import '../styles/globals.css'
-import { SessionProvider } from "next-auth/react"
+import { SessionProvider } from "next-auth/react";
+import { RecoilRoot } from 'recoil';
 
 export default function App({
   Component,
@@ -7,7 +8,10 @@ export default function App({
 }) {
   return (
     <SessionProvider session={session}>
+      <RecoilRoot>
       <Component {...pageProps} />
+      </RecoilRoot>
     </SessionProvider>
   )
 }
+//i wrap my entire app in recoil root to manage recoil state
