@@ -34,8 +34,10 @@ function Post ({ id, post, postPage }) {
   //desctructuring posts and id and changing 
   // info dynamically with props in this component
   const [isOpen,setIsOpen] = useRecoilState(modalState)// this is globally available to me 
+  const [postId,setPostId] = useRecoilState(postIdState)
   // imported the userecoilState 
   // and the modalState from the modal Atom and recoil. 
+  const [comments, setComments] = useState([])
   return (
     <div className="p-3 flex cursor-pointer border-b border-gray-700">
       {!postPage && (
@@ -82,12 +84,12 @@ function Post ({ id, post, postPage }) {
         }`}
         >
           {/* if it is a post page i want my left and right margin to be auto */}
-          {/* <div
+          <div
             className="flex items-center space-x-1 group"
             onClick={(e) => {
               e.stopPropagation();
-              setPostId(id);
-              setIsOpen(true);
+              setPostId(id);//setted this globally
+              setIsOpen(true);//modalState
             }}
           >
             <div className="icon group-hover:bg-[#1d9bf0] group-hover:bg-opacity-10">
@@ -98,8 +100,8 @@ function Post ({ id, post, postPage }) {
                 {comments.length}
               </span>
             )}
-          </div> */}
-
+          </div>
+            {/*  */}
           {session.user.uid === post?.id ? (
             <div
               className="flex items-center space-x-1 group"

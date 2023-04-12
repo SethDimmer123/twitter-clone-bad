@@ -15,3 +15,5 @@ export default function App({
   )
 }
 //i wrap my entire app in recoil root to manage recoil state
+// also to give access to the whole context(state) throughout my entire app.
+
