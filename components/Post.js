@@ -33,6 +33,9 @@ function Post ({ id, post, postPage }) {
   const {data: session} = useSession();
   //desctructuring posts and id and changing 
   // info dynamically with props in this component
+  const [isOpen,setIsOpen] = useRecoilState(modalState)// this is globally available to me 
+  // imported the userecoilState 
+  // and the modalState from the modal Atom and recoil. 
   return (
     <div className="p-3 flex cursor-pointer border-b border-gray-700">
       {!postPage && (

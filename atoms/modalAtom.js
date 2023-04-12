@@ -12,3 +12,8 @@ export const modalState = atom({//atom represents a piece of state (put it as an
 // into any place i want to use it
 
 // Recoil state management library
+
+export const postIdState = atom({
+    key:"postIdState",
+    default:"",
+});
