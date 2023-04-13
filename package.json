@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@emoji-mart/react": "^1.1.1",
+    "@headlessui/react": "^1.7.14",
     "@heroicons/react": "1.0.0",
     "firebase": "^9.19.1",
     "moment": "^2.29.4",
