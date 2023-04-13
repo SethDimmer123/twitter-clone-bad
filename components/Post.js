@@ -46,7 +46,7 @@ function Post ({ id, post, postPage }) {
   useEffect(() => 
   onSnapshot(collection(db, "posts",id, "likes"), (snapshot) => 
   setLikes(snapshot.docs)
-  ),[db,id]//dependencies 2 whenever there is something outside the useEffect i include the dependencies.
+  ),[db,id]//dependencies 2 in this case whenever there is something outside the useEffect i include the dependencies.
   );
 
   useEffect(
