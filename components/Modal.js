@@ -108,7 +108,7 @@ function Modal() {
                                     <div className="text-[#6e767d] flex gap-x-3 relative">
                                         <span className="w-0.5 h-full z-[-1] absolute
                                         left-5 top-11 bg-gray-600"/>
-                                        <img src={session.user.image} alt="" className="h-11 w-11 rounded-full"
+                                        <img src={session?.user?.image} alt="" className="h-11 w-11 rounded-full"
                                         />
                                         <div>
                                             <div className="inline-block group">
@@ -130,7 +130,7 @@ function Modal() {
                                     </div>
 
                                     <div>
-                                        <img src={session.user.image}
+                                        <img src={session?.user?.image}
                                             className="h-11 w-11 rounded-full mt-6" alt="" />
                                         <div className="flex-grow mt-2">
                                             <textarea
