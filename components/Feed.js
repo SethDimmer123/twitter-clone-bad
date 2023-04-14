@@ -37,7 +37,7 @@ function Feed() {
     [db]
   );
 
-  console.log(posts);
+  // console.log(session);
 
     //   flex-grow lets me take as much space as possible for middle(feed component)
   return (

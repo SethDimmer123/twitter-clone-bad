@@ -34,7 +34,8 @@ function Modal() {
     const router = useRouter();
 
 
-    if (postId === true) {
+
+    if(postId) {
         useEffect(() =>
             onSnapshot(doc(db, "posts", postId), (snapshot) => {
                 setPost(snapshot.data());
@@ -42,6 +43,9 @@ function Modal() {
             [db, postId]
         );
     }
+    
+
+    console.log(post)
 
     const sendComment = async (e) => {
         e.preventDefault();
@@ -60,7 +64,7 @@ function Modal() {
         router.push(`/${postId}`)//pushing to id route
     };
 
-    // console.log()
+    console.log(session)
 
 
     return (//headless ui

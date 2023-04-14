@@ -55,6 +55,7 @@ function PostPage({ trendingResults, followResults, providers }) {
     [db, id]
   );
 
+
   if (!session) return <Login providers={providers} />;
 
   return (
