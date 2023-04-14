@@ -43,9 +43,7 @@ function Modal() {
             [db, postId]
         );
     }
-    
-
-    console.log(post)
+    console.log(post) //console.log to see error 
 
     const sendComment = async (e) => {
         e.preventDefault();
