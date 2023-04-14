@@ -9,7 +9,7 @@ export default NextAuth ({
     GoogleProvider({
         clientId: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET
-      })
+      }),
     // ...add more providers here
   ],
   callbacks: {
@@ -19,8 +19,8 @@ export default NextAuth ({
       .join("")
       .toLocaleLowerCase();
 
-      session.user.uid = token.sub
-      return session
+      session.user.uid = token.sub;
+      return session;
     },
   },
 });

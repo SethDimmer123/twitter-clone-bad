@@ -30,60 +30,61 @@ import { modalState, postIdState } from "../atoms/modalAtom";
 import { db } from "../firebase";
 
 
-function Post ({ id, post, postPage }) { 
-  const {data: session} = useSession();
+function Post({ id, post, postPage }) {
+  const { data: session } = useSession();
   //desctructuring posts and id and changing 
   // info dynamically with props in this component
-  const [isOpen,setIsOpen] = useRecoilState(modalState)// this is globally available to me 
-  const [postId,setPostId] = useRecoilState(postIdState)
+  const [isOpen, setIsOpen] = useRecoilState(modalState)// this is globally available to me 
+  const [postId, setPostId] = useRecoilState(postIdState)
   // imported the userecoilState 
   // and the modalState from the modal Atom and recoil. 
   const [comments, setComments] = useState([])
-  const [likes,setLikes] = useState([]);
-  const [liked,setLiked] = useState(false);
+  const [likes, setLikes] = useState([]);
+  const [liked, setLiked] = useState(false);
   const router = useRouter();
 
 
   useEffect(// fetching comments
     () =>
       onSnapshot(
-        query(collection(db, "posts",id,"comments"), orderBy
-        ("timestamp", "desc")),
+        query(collection(db, "posts", id, "comments"), orderBy
+          ("timestamp", "desc")),
         (snapshot) => setComments(snapshot.docs)
-        
+
       ),
-    [db,id]
+    [db, id]
   );
 
 
-  useEffect(() => 
-  onSnapshot(collection(db, "posts",id, "likes"), (snapshot) => 
-  setLikes(snapshot.docs)
-  ),[db,id]//dependencies 2 in this case whenever there is something outside the useEffect i include the dependencies.
+  useEffect(() =>
+    onSnapshot(collection(db, "posts", id, "likes"), (snapshot) =>
+      setLikes(snapshot.docs)
+    ), [db, id]//dependencies 2 in this case whenever there is something outside the useEffect i include the dependencies.
   );
 
   useEffect(
-    () => 
-    setLiked(//setting my likes inside the useEffect
-      likes.findIndex((like) => like.id === session?.user?.uid) ==! -1
-  ), //finding the index and getting 1 like and checking like ID if it matches the session.user.id
-  // and RETURNS AS TRUE INSTEAD OF FALSE.
-  [likes]
+    () =>
+      setLiked(//setting my likes inside the useEffect
+        likes.findIndex((like) => like.id === session?.user?.uid) !== -1
+      ), //finding the index and getting 1 like and checking like ID if it matches the session.user.id
+    // and RETURNS AS TRUE INSTEAD OF FALSE.
+    [likes]
   );
 
   const likePost = async () => {
-    if(liked) {// IF LIKE IS TRUE 
-      await deleteDoc(doc(db,"posts",id,"likes",session.user.uid))
+    if (liked) {// IF LIKE IS TRUE 
+      await deleteDoc(doc(db, "posts", id, "likes", session.user.uid))
     }//THEN I WILL DELETE DOCUMENT because i already created a collection
-    else{
-      await setDoc(doc(db,"posts",id,"likes",session.user.uid), {
-        username:session.user.name
-      })//once already liked to know if i already set liked i use a useEffect becasue by default setLiked is false.
+    else {
+      await setDoc(doc(db, "posts", id, "likes", session.user.uid), {
+        username: session.user.name,
+      });//once already liked to know if i already set liked i use a useEffect becasue by default setLiked is false.
     }
-  }
+  };
+
   return (
     <div className="p-3 flex cursor-pointer border-b border-gray-700"
-    onClick={() => router.push(`/${id}`)}
+      onClick={() => router.push(`/${id}`)}
     >
       {!postPage && (
         <img src={post?.userImg} alt="" className="h-11 w-11 rounded-full mr-4"
@@ -92,8 +93,8 @@ function Post ({ id, post, postPage }) {
       <div className="flex flex-col space-y-2 w-full">
         <div className={`flex ${!postPage && "justify-between"}`}>
           {postPage && (
-            <img src={post?.userImg} alt="Profile Pic" 
-            className="h-11 w-11 rounded-full mr-4"
+            <img src={post?.userImg} alt="Profile Pic"
+              className="h-11 w-11 rounded-full mr-4"
             />
           )}
           <div className="text-[#6e767d]">
@@ -102,12 +103,12 @@ function Post ({ id, post, postPage }) {
               group-hover:underline ${!postPage && "inline-block"}`}>{post?.username}</h4>
               <span className={`text-sm:text-[15px] ${!postPage && "ml-1.5"}`}>
                 @{post?.tag}
-                </span>
+              </span>
             </div>{" "}{/**spacing using js */}
             ·{" "}
             <span className="hover:underline text-sm sm:text-[15px]">
-            <Moment fromNow>{post?.timestamp?.toDate()}</Moment>
-             {/* moment js timestamps */}
+              <Moment fromNow>{post?.timestamp?.toDate()}</Moment>
+              {/* moment js timestamps */}
             </span>
             {!postPage && (
               <p className="text-[#d9d9d9] text-[15px] sm:text-base mt-0.5">{post?.text}</p>
@@ -118,16 +119,16 @@ function Post ({ id, post, postPage }) {
           </div>
         </div>
         {postPage && (
-        <p className="text-[#d9d9d9] text-[15px] sm:text-base mt-0.5">
-          {post?.text}
-        </p>
+          <p className="text-[#d9d9d9] text-[15px] sm:text-base mt-0.5">
+            {post?.text}
+          </p>
         )}
-        <img src={post?.image} alt="" 
-        className="rounded-2xl max-h-[700px] object-cover mr-2"
+        <img src={post?.image} alt=""
+          className="rounded-2xl max-h-[700px] object-cover mr-2"
         />
         <div className={`text-[#6e767d] flex justify-between w-10/12 
         ${postPage && "mx-auto"
-        }`}
+          }`}
         >
           {/* if it is a post page i want my left and right margin to be auto */}
           <div
@@ -165,8 +166,8 @@ function Post ({ id, post, postPage }) {
               </div>
             </div>
           ) : (// this icon below will show up only if the post is 
-          // not of that particular user but some elses post then the switch 
-          // horizontal i con below will show up.
+            // not of that particular user but some elses post then the switch 
+            // horizontal i con below will show up.
             <div className="flex items-center space-x-1 group">
               <div className="icon group-hover:bg-green-500/10">
                 <SwitchHorizontalIcon className="h-5 group-hover:text-green-500" />
@@ -190,9 +191,8 @@ function Post ({ id, post, postPage }) {
             </div>
             {likes.length > 0 && (//if likes i greater than 0 display the likes
               <span
-                className={`group-hover:text-pink-600 text-sm ${
-                  liked && "text-pink-600"
-                }`}
+                className={`group-hover:text-pink-600 text-sm ${liked && "text-pink-600"
+                  }`}
               >
                 {likes.length}
               </span>
@@ -208,7 +208,7 @@ function Post ({ id, post, postPage }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default Post

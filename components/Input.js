@@ -4,7 +4,7 @@ import {
   EmojiHappyIcon, 
   PhotographIcon } from "@heroicons/react/outline";
 import { XIcon } from "@heroicons/react/solid";
-import { useRef,useState } from "react";
+import { useRef, useState } from "react";
 import Picker from '@emoji-mart/react'
 import { db, storage } from "../firebase";
 import {
@@ -23,19 +23,19 @@ import { useSession } from 'next-auth/react';
 
 
 function input() {
+  const {data: session} = useSession();
     const [input,setInput] = useState("");
     const [selectedFile, setSelectedFile] = useState(null);// by default null
     // as soon as i select a file the image is put inside of a piece of state called selectedFile
     const [showEmojis,setShowEmojis] = useState(false)
     const [loading, setLoading] = useState(false)
     const filePickerRef = useRef(null);
-    const {data: session} = useSession();
 
-    const sendPost = async() => {
+    const sendPost = async () => {
       if(loading) return;
       setLoading(true);
 
-      const docRef = await addDoc(collection(db, 'posts'), {
+      const docRef = await addDoc(collection(db, "posts"), {
         id: session.user.uid,
         username: session.user.name,
         userImg: session.user.image,
@@ -160,7 +160,7 @@ function input() {
             rounded-full px-4 py-1.5 font-bold 
             shadow-md hover:bg-[#1a8cd8] disabled:hover:bg-[#1d9bf0] 
             disabled:opacity-50 disabled:cursor-default"
-             disabled={!input.trim() && !selectedFile}
+             disabled={!input && !selectedFile}
              onClick={sendPost}
              >
               Tweet

@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import {HomeIcon} from "@heroicons/react/solid";
+import { HomeIcon } from "@heroicons/react/solid";
 import {
     HashtagIcon,
     BellIcon,
@@ -16,6 +16,7 @@ import { signOut, useSession } from 'next-auth/react';
 
 function Sidebar() {
   const {data: session} = useSession();
+
   return (
     <div className='hidden sm:flex flex-col items-center xl:items-start
     xl:w-[340px] p-2 fixed h-full'>
@@ -48,8 +49,7 @@ function Sidebar() {
                 <h4 className='font-bold'>{session.user.name}</h4>
                 <p className='text-[#6e767d]'>@{session.user.tag}</p>
             </div>
-            <DotsHorizontalIcon className="h-5 hidden xl:inline ml-10" 
-            />
+            <DotsHorizontalIcon className="h-5 hidden xl:inline ml-10" />
         </div>
     </div>
   );// props are active,Icon ,and text

@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import Sidebar from '../components/Sidebar'
-import Feed from '../components/Feed'
+import Sidebar from '../components/Sidebar';
+import Feed from '../components/Feed';
 import { getProviders, getSession, useSession } from "next-auth/react";
 import Login from '../components/Login';
 import Modal from '../components/Modal';
@@ -8,11 +8,11 @@ import { useRecoilState } from 'recoil';
 import { modalState } from '../atoms/modalAtom';
 
 export default function Home({ trendingResults, followResults, providers }) {
-  const {data: session} = useSession();
-  const [isOpen,setIsOpen] = useRecoilState(modalState)
+  const { data: session } = useSession();
+  const [isOpen, setIsOpen] = useRecoilState(modalState)
 
   if (!session) return <Login providers={providers} />;
-  
+
   return (
     <div className="">
       <Head>
@@ -22,17 +22,17 @@ export default function Home({ trendingResults, followResults, providers }) {
       </Head>
 
       <main className='bg-black min-h-screen flex max-w-[1500px] mx-auto'>
-        <Sidebar/>
+        <Sidebar />
         {/* Feed */}
-        <Feed/>
+        <Feed />
         {/* Widgets */}
 
         {/* Modal */}
         {isOpen && <Modal />}
-        <Modal/>
-        {/*only display modal if my isOpen state is true  */} 
+        {/* <Modal/> */}
+        {/*only display modal if my isOpen state is true  */}
       </main>
-      </div>
+    </div>
   )
 }
 
@@ -44,7 +44,7 @@ export async function getServerSideProps(context) {
     (res) => res.json()
   );
   const providers = await getProviders();
-  console.log(providers)
+  // console.log(providers)
   const session = await getSession(context);// get rid of flickering of login page
 
   return {

@@ -3,7 +3,7 @@ import Image from "next/image"
 
 // login component
 
-function Login({providers}) {
+function Login({ providers }) {
    return <div className="flex flex-col items-center space-y-20 pt-48">
           <Image
         src="/twitter-logo-5.png"

@@ -1,29 +1,25 @@
-import {
-    collection,
-    deleteDoc,
-    doc,
-    onSnapshot,
-    orderBy,
-    query,
-    setDoc,
-    addDoc
-} from "@firebase/firestore";
-import { Dialog, Transition } from "@headlessui/react";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import { Fragment, useEffect, useState } from "react";
-import Moment from "react-moment";
 import { useRecoilState } from "recoil";
 import { modalState, postIdState } from "../atoms/modalAtom";
-import { db } from "../firebase";
+import { Dialog, Transition } from "@headlessui/react";
+import { Fragment, useEffect, useState } from "react";
 import {
-    CalendarIcon,
-    ChartBarIcon,
-    EmojiHappyIcon,
-    PhotographIcon,
-    XIcon,
+  onSnapshot,
+  doc,
+  addDoc,
+  collection,
+  serverTimestamp,
+} from "@firebase/firestore";
+import { db } from "../firebase";
+import { useSession } from "next-auth/react";
+import {
+  CalendarIcon,
+  ChartBarIcon,
+  EmojiHappyIcon,
+  PhotographIcon,
+  XIcon,
 } from "@heroicons/react/outline";
-import { serverTimestamp } from "firebase/firestore";
+import { useRouter } from "next/router";
+import Moment from "react-moment";
 
 function Modal() {
     const { data: session } = useSession();
@@ -64,6 +60,8 @@ function Modal() {
         router.push(`/${postId}`)//pushing to id route
     };
 
+    // console.log()
+
 
     return (//headless ui
         //code below just animations from headless UI
@@ -99,7 +97,8 @@ function Modal() {
                             border-gray-700">
                                 <div className="hoverAnimation w-9 h-9  flex 
                                 items-center justify-center xl:px-0"
-                                    onClick={() => setIsOpen(false)}>
+                                    onClick={() => setIsOpen(false)}
+                                    >
                                     <XIcon className="h-[22px] text-white" />
                                 </div>
                             </div>
@@ -108,7 +107,7 @@ function Modal() {
                                     <div className="text-[#6e767d] flex gap-x-3 relative">
                                         <span className="w-0.5 h-full z-[-1] absolute
                                         left-5 top-11 bg-gray-600"/>
-                                        <img src={session?.user?.image} alt="" className="h-11 w-11 rounded-full"
+                                        <img src={post?.userImg} alt="" className="h-11 w-11 rounded-full"
                                         />
                                         <div>
                                             <div className="inline-block group">
@@ -130,7 +129,7 @@ function Modal() {
                                     </div>
 
                                     <div>
-                                        <img src={session?.user?.image}
+                                        <img src={session.user.image}
                                             className="h-11 w-11 rounded-full mt-6" alt="" />
                                         <div className="flex-grow mt-2">
                                             <textarea
