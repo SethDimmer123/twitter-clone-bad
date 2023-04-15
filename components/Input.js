@@ -86,7 +86,7 @@ function input() {
   <div className={`border-b border-gray-700 p-3 flex space-x-3
   overflow-y-scroll ${loading && "opacity-60"}`}>{/**when loading is true i want opacity of my input to 0.6  */}
     {/**use gap-x-3 to see how many pixels */}
-      <img src={session.user.image}                         
+      <img src={session?.user?.image}                         
     alt=""
      className='h-11 w-11 rounded-full cursor-pointer'
      />
