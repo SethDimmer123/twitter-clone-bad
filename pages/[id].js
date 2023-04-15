@@ -18,6 +18,7 @@ import { db } from "../firebase";
 import { ArrowLeftIcon } from "@heroicons/react/solid";
 import Comment from "../components/Comment";
 import Head from "next/head";
+import Widgets from "../components/Widgets";
 
 
 
@@ -95,7 +96,7 @@ function PostPage({ trendingResults, followResults, providers }) {
         {/* Feed */}
         {/* <Feed/> */}
         {/* Widgets */}
-
+        <Widgets trendingResults={trendingResults} followResults={followResults}/>
         {/* Modal */}
         {isOpen && <Modal />}
         {/* <Modal /> */}
