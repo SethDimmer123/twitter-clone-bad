@@ -8,7 +8,7 @@ import { useRecoilState } from 'recoil';
 import { modalState } from '../atoms/modalAtom';
 import Widgets from '../components/Widgets';
 
-export default function Home({ trendingResults, followResults, providers }) {
+export default function Home({ trendingResults, providers }) {
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useRecoilState(modalState)
 
@@ -27,7 +27,7 @@ export default function Home({ trendingResults, followResults, providers }) {
         {/* Feed */}
         <Feed />
         {/* Widgets */}
-        <Widgets trendingResults={trendingResults} followResults={followResults}/>
+        <Widgets trendingResults={trendingResults}  />
         {/* Modal */}
         {isOpen && <Modal />}
         {/* <Modal/> */}
@@ -41,9 +41,9 @@ export async function getServerSideProps(context) {
   const trendingResults = await fetch("https://www.jsonkeeper.com/b/NKEV").then(//api endpoint
     (res) => res.json()
   );
-  const followResults = await fetch("https://jsonkeeper.com/b/WWMJ").then(//api endpoint
-    (res) => res.json()
-  );
+  // const followResults = await fetch("https://jsonkeeper.com/b/WWMJ").then(//api endpoint
+  //   (res) => res.json()
+  // );
   const providers = await getProviders();
   // console.log(providers)
   const session = await getSession(context);// get rid of flickering of login page
@@ -51,7 +51,6 @@ export async function getServerSideProps(context) {
   return {
     props: {
       trendingResults,
-      followResults,
       providers,
       session,
       //prevents flickering of login (in react app)

@@ -4,13 +4,13 @@
 
 
   body{
-
+    @apply bg-black
   }
 
 
 @layer components{
   .hoverAnimation{
-    @apply hover:bg-[#0d0d2e] hover:bg-opacity-10 rounded-full
+    @apply hover:bg-[#b7b7d7] hover:bg-opacity-10 rounded-full
     cursor-pointer w-[52px] h-[52px] xl:w-auto xl:h-auto xl:py-3
     xl:px-4 transition duration-200 ease-out;
   }

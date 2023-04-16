@@ -41,9 +41,9 @@ function Feed() {
 
     //   flex-grow lets me take as much space as possible for middle(feed component)
   return (
-  <div className='text-white flex-grow border-l border-r
+  <div className='text-[#fff] flex-grow border-l border-r
   border-gray-700 max-w-2xl sm:ml-[73px] xl:ml-[370px]'>
-  <div className='text-[black] flex items-center
+  <div className='text-[#fff] flex items-center
   sm:justify-between py-2 px-2 top-0 z-50
   border-b border-gray-700'>
 {/* when using position fixed or sticky i always have to give the top value */}

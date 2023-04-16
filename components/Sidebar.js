@@ -23,9 +23,9 @@ function Sidebar() {
       {/* when using position fixed or sticky i always have to give the top value */}
         <div className='flex items-center justify-center w-14 h-14 
         hoverAnimation p-0 xl:ml-24'>
-            <Image src="/twitter-logo-4.png" width={30} height={30} alt=''/>
+            <Image src="/twitter-logo-5.png" width={30} height={30} alt=''/>
         </div>
-        <div className='space-y-2.5 mt-4 mb-2.5 xl:ml-24 text-[black]'>
+        <div className='space-y-2.5 mt-4 mb-2.5 xl:ml-24 text-black'>
         <SidebarLink text="Home" Icon={HomeIcon} active />
         <SidebarLink text="Explore" Icon={HashtagIcon} />
         <SidebarLink text="Notifications" Icon={BellIcon} />
@@ -46,10 +46,10 @@ function Sidebar() {
             className='h-10 w-10 rounded-full xl:mr-2.5'
             />
             <div className='hidden xl:inline leading-5'>
-                <h4 className='font-bold'>{session.user.name}</h4>
-                <p className='text-[black]'>@{session.user.tag}</p>
+                <h4 className='font-bold text-white'>{session.user.name}</h4>
+                <p className='text-[#fff]'>@{session.user.tag}</p>
             </div>
-            <DotsHorizontalIcon className="h-5 hidden xl:inline ml-10" />
+            <DotsHorizontalIcon className="h-5 hidden xl:inline ml-10 text-white" />
         </div>
     </div>
   );// props are active,Icon ,and text

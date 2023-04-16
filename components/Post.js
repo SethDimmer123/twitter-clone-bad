@@ -97,9 +97,9 @@ function Post({ id, post, postPage }) {
               className="h-11 w-11 rounded-full mr-4"
             />
           )}
-          <div className="text-[black]">
+          <div className="text-[white]">
             <div className="inline-block group">
-              <h4 className={`font-bold text-[15px] sm:text-base text-[black]
+              <h4 className={`font-bold text-[15px] sm:text-base text-[#fff]
               group-hover:underline ${!postPage && "inline-block"}`}>{post?.username}</h4>
               <span className={`text-sm:text-[15px] ${!postPage && "ml-1.5"}`}>
                 @{post?.tag}
@@ -111,7 +111,7 @@ function Post({ id, post, postPage }) {
               {/* moment js timestamps */}
             </span>
             {!postPage && (
-              <p className="text-[black] text-[15px] sm:text-base mt-0.5">{post?.text}</p>
+              <p className="text-[#fff] text-[15px] sm:text-base mt-0.5">{post?.text}</p>
             )}
           </div>
           <div className="icon group flex-shrink-0 ml-auto">
@@ -119,7 +119,7 @@ function Post({ id, post, postPage }) {
           </div>
         </div>
         {postPage && (
-          <p className="text-[black] text-[15px] sm:text-base mt-0.5">
+          <p className="text-[#fff] text-[15px] sm:text-base mt-0.5">
             {post?.text}
           </p>
         )}

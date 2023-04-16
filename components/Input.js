@@ -102,8 +102,8 @@ function input() {
             name="" 
             rows="2" 
             placeholder="What's happening?"
-            className="bg-transparent outline-none text-[black]
-            text-lg placeholder-black tracking-wide w-full 
+            className="bg-transparent outline-none text-[white]
+            text-lg placeholder-white tracking-wide w-full 
             min-h-[50px]"
             />
             {/* if my selected file is there(true) then i want the code below to be there */}
@@ -136,9 +136,9 @@ function input() {
                         {/* useRef hook to create references i am providing(pointing) a ref to the input field i want to have the reference basically click the icon */}
                     </div>
 
-                    <div className="icon rotate-90">
+                    {/* <div className="icon rotate-90">
                 <ChartBarIcon className="text-[#1d9bf0] h-[22px]" />
-              </div>
+              </div> */}
 
               <div className="icon" onClick={() => setShowEmojis
                 (!showEmojis)}>
