@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 function SidebarLink({Icon,text,active}) {// destructucturing icons from sidebar.js(props)
   const router = useRouter();
   return (
-  <div className={`text-[#d9d9d9] flex 
+  <div className={`text-[black] flex 
   items-center} justify-center 
   xl:justify-start text-xl space-x-3 hoverAnimation ${active && "font-bold"}`}
   >

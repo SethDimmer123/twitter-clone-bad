@@ -102,8 +102,8 @@ function input() {
             name="" 
             rows="2" 
             placeholder="What's happening?"
-            className="bg-transparent outline-none text-[#d9d9d9]
-            text-lg placeholder-gray-500 tracking-wide w-full 
+            className="bg-transparent outline-none text-[black]
+            text-lg placeholder-black tracking-wide w-full 
             min-h-[50px]"
             />
             {/* if my selected file is there(true) then i want the code below to be there */}
