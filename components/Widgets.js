@@ -1,8 +1,9 @@
 import { SearchIcon } from "@heroicons/react/outline";
-import Trending from "./Trending"
+import Trending from "./Trending";
 import Image from "next/image";
 
 function Widgets({ trendingResults, followResults }) {
+
   return (
     <div className="hidden lg:inline ml-8 xl:w-[450px] py-1 space-y-5">
       <div className="sticky top-0 py-1.5 bg-black z-50 w-11/12 xl:w-9/12">
@@ -33,6 +34,13 @@ function Widgets({ trendingResults, followResults }) {
             className="hover:bg-white hover:bg-opacity-[0.03] px-4 py-2 cursor-pointer transition duration-200 ease-out flex items-center"
             key={index}
           >
+            <Image
+              src={"/space-x-1.jpeg"}
+              width={50}
+              height={50}
+              objectFit="cover"
+              className="rounded-full"
+            />
             <div className="ml-4 leading-5 group">
               <h4 className="font-bold group-hover:underline">
                 {result.username}

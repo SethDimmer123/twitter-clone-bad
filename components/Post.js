@@ -1,4 +1,3 @@
-// most difficult component of the entire twitter bulid
 import {
   collection,
   deleteDoc,
