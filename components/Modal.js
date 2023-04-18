@@ -1,7 +1,7 @@
 import { useRecoilState } from "recoil";
 import { modalState, postIdState } from "../atoms/modalAtom";
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import {
   onSnapshot,
   doc,
@@ -32,6 +32,12 @@ function Modal() {
     // and the modalState from the modal Atom and recoil. 
     const [comments, setComments] = useState("")
     const router = useRouter();
+    const [selectedFile,setSelectedFile] = useState(null);
+    const filePickerRef = useRef(null)
+
+    const addImageToPost = () => {
+
+    }
 
 
 
@@ -91,19 +97,29 @@ function Modal() {
                         leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                         leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     >
+
                         <div className="inline-block align-bottom
                          bg-black rounded-2xl text-left overflow-hidden 
                          shadow-xl transform transition-all sm:my-8 sm:align-middle 
                          sm:max-w-xl sm:w-full">
+                             {selectedFile && (
                             <div className="flex items-center px-1.5 py-2 border-b
                             border-gray-700">
                                 <div className="hoverAnimation w-9 h-9  flex 
                                 items-center justify-center xl:px-0"
                                     onClick={() => setIsOpen(false)}
+                                    
                                     >
-                                    <XIcon className="h-[22px] text-white" />
+                                    <XIcon className="h-[22px] text-white"onClick={() => setSelectedFile(null)} />
                                 </div>
+                                <img src={selectedFile} alt="" className="rounded-2xl
+                                max-h-80 object-contain" />
                             </div>
+                                )}
+
+                             <div>
+
+                             </div>
                             <div className="flex px-4 pt-5 pb-2.5 sm:px-6">
                                 <div className="w-full">
                                     <div className="text-[#6e767d] flex gap-x-3 relative">
@@ -143,8 +159,11 @@ function Modal() {
                                             />
                                             <div className="flex items-center justify-between pt-2.5">
                                                     <div className="flex items-center">
-                                                    <div className="icon">
+                                                    <div className="icon"  onClick={() => filePickerRef.
+                                                        current.click()}>
                                                         <PhotographIcon className="text-[#1d9bf0] h-[22px]" />
+                                                        <input type="file" onChange={addImageToPost} ref=
+                                                            {filePickerRef} hidden/>
                                                     </div>
 
                                                     <div className="icon">
