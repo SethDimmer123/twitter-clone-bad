@@ -3,20 +3,18 @@ import { modalState, postIdState } from "../atoms/modalAtom";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useRef, useState } from "react";
 import {
-  onSnapshot,
-  doc,
-  addDoc,
-  collection,
-  serverTimestamp,
+    onSnapshot,
+    doc,
+    addDoc,
+    collection,
+    serverTimestamp,
 } from "@firebase/firestore";
 import { db } from "../firebase";
 import { useSession } from "next-auth/react";
 import {
-  CalendarIcon,
-  ChartBarIcon,
-  EmojiHappyIcon,
-  PhotographIcon,
-  XIcon,
+    EmojiHappyIcon,
+    PhotographIcon,
+    XIcon,
 } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import Moment from "react-moment";
@@ -32,7 +30,7 @@ function Modal() {
     // and the modalState from the modal Atom and recoil. 
     const [comments, setComments] = useState("")
     const router = useRouter();
-    const [selectedFile,setSelectedFile] = useState(null);
+    const [selectedFile, setSelectedFile] = useState(null);
     const filePickerRef = useRef(null)
 
     const addImageToPost = () => {
@@ -41,7 +39,7 @@ function Modal() {
 
 
 
-    if(postId) {
+    if (postId) {
         useEffect(() =>
             onSnapshot(doc(db, "posts", postId), (snapshot) => {
                 setPost(snapshot.data());
@@ -54,12 +52,12 @@ function Modal() {
     const sendComment = async (e) => {
         e.preventDefault();
 
-        await addDoc(collection(db,'posts',postId,"comments"),{//collection called comments to firebase
-            comment:comments,
-            username:session.user.name,
-            tag:session.user.tag,
-            userImg:session.user.image,
-            timestamp:serverTimestamp()
+        await addDoc(collection(db, 'posts', postId, "comments"), {//collection called comments to firebase
+            comment: comments,
+            username: session.user.name,
+            tag: session.user.tag,
+            userImg: session.user.image,
+            timestamp: serverTimestamp()
         })
 
         setIsOpen(false)
@@ -102,24 +100,24 @@ function Modal() {
                          bg-black rounded-2xl text-left overflow-hidden 
                          shadow-xl transform transition-all sm:my-8 sm:align-middle 
                          sm:max-w-xl sm:w-full">
-                             {selectedFile && (
-                            <div className="flex items-center px-1.5 py-2 border-b
+                            {selectedFile && (
+                                <div className="flex items-center px-1.5 py-2 border-b
                             border-gray-700">
-                                <div className="hoverAnimation w-9 h-9  flex 
+                                    <div className="hoverAnimation w-9 h-9  flex 
                                 items-center justify-center xl:px-0"
-                                    onClick={() => setIsOpen(false)}
-                                    
+                                        onClick={() => setIsOpen(false)}
+
                                     >
-                                    <XIcon className="h-[22px] text-white"onClick={() => setSelectedFile(null)} />
-                                </div>
-                                <img src={selectedFile} alt="" className="rounded-2xl
+                                        <XIcon className="h-[22px] text-white" onClick={() => setSelectedFile(null)} />
+                                    </div>
+                                    <img src={selectedFile} alt="" className="rounded-2xl
                                 max-h-80 object-contain" />
+                                </div>
+                            )}
+
+                            <div>
+
                             </div>
-                                )}
-
-                             <div>
-
-                             </div>
                             <div className="flex px-4 pt-5 pb-2.5 sm:px-6">
                                 <div className="w-full">
                                     <div className="text-[#6e767d] flex gap-x-3 relative">
@@ -158,36 +156,32 @@ function Modal() {
                                                 className="bg-transparent outline-none text-[#d9d9d9] text-lg placeholder-gray-500 tracking-wide w-full min-h-[120px] pt-2"
                                             />
                                             <div className="flex items-center justify-between pt-2.5">
-                                                    <div className="flex items-center">
-                                                    <div className="icon"  onClick={() => filePickerRef.
+                                                <div className="flex items-center">
+                                                    <div className="icon" onClick={() => filePickerRef.
                                                         current.click()}>
                                                         <PhotographIcon className="text-[#1d9bf0] h-[22px]" />
                                                         <input type="file" onChange={addImageToPost} ref=
-                                                            {filePickerRef} hidden/>
+                                                            {filePickerRef} hidden />
                                                     </div>
 
                                                     <div className="icon">
                                                         <EmojiHappyIcon className="text-[#1d9bf0] h-[22px]" />
                                                     </div>
-
-                                                    <div className="icon">
-                                                        <CalendarIcon className="text-[#1d9bf0] h-[22px]" />
-                                                    </div>
-                                                    </div>
-                                                    <button
+                                                </div>
+                                                <button
                                                     className="bg-[#1d9bf0] text-white rounded-full px-4 py-1.5 font-bold shadow-md hover:bg-[#1a8cd8] disabled:hover:bg-[#1d9bf0] disabled:opacity-50 disabled:cursor-default"
                                                     type="submit"
                                                     onClick={sendComment}//function called send comment
                                                     disabled={!comments.trim()}
-                                                    >
+                                                >
                                                     Reply
-                                                    </button>
-                                                </div>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </Transition.Child>
                 </div>
             </Dialog>
