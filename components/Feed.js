@@ -1,6 +1,6 @@
 import { SparklesIcon } from '@heroicons/react/outline';
 import React from 'react'
-import Input from '../components/Input';
+import StyledInput from './StyledInput';
 import { useState,useEffect } from "react";
 import { onSnapshot, collection, query, orderBy } from "@firebase/firestore";
 import { db } from "../firebase";
@@ -53,7 +53,7 @@ function Feed() {
         <SparklesIcon className='h-5 text-white'/>
         </div>  
     </div>
-    <Input />
+    <StyledInput />
     {/* rendering all posts */}
     <div className='pb-72'>
       {posts.map(post => (

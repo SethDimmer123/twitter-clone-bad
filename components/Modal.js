@@ -14,7 +14,6 @@ import { useSession } from "next-auth/react";
 import {
     EmojiHappyIcon,
     PhotographIcon,
-    CalendarIcon,
     XIcon,
 } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
@@ -37,7 +36,7 @@ function Modal() {
     const [showEmojis, setShowEmojis] = useState(false)
     const filePickerRef = useRef(null)
 
-    const addImageToPost = () => { };
+    const addImageToPost = () => {};
 
 
     const addEmoji = (e) => {
@@ -198,7 +197,7 @@ function Modal() {
                     </Transition.Child>
                 </div>
                 <div className="absolute ml-[50%] ">
-                    
+
                         {showEmojis && (
                             <Picker
                                 onEmojiSelect={addEmoji}

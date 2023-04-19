@@ -21,7 +21,7 @@ import { useSession } from 'next-auth/react';
 
 
 
-function Input() {
+function StyledInput() {
   const {data: session} = useSession();
     const [input,setInput] = useState("");
     const [selectedFile, setSelectedFile] = useState(null);// by default null
@@ -171,4 +171,4 @@ function Input() {
   );
 }
 
-export default Input
+export default StyledInput
