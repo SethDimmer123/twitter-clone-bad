@@ -55,7 +55,7 @@ function Modal() {
             onSnapshot(doc(db, "posts", postId), (snapshot) => {
                 setPost(snapshot.data());
             }),
-            [postId]
+            [postId,db]
         );
     // }
     console.log(post) //console.log to see error 
