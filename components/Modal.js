@@ -19,6 +19,7 @@ import {
 import { useRouter } from "next/router";
 import Moment from "react-moment";
 import Picker from '@emoji-mart/react'
+import Image from "next/image";
 // import 'emoji-mart/css/emoji-mart.css'
 
 function Modal() {
@@ -54,7 +55,7 @@ function Modal() {
             onSnapshot(doc(db, "posts", postId), (snapshot) => {
                 setPost(snapshot.data());
             }),
-            [db, postId]
+            [postId]
         );
     }
     console.log(post) //console.log to see error 
@@ -120,7 +121,7 @@ function Modal() {
                                     >
                                         <XIcon className="h-[22px] text-white" onClick={() => setSelectedFile(null)} />
                                     </div>
-                                    <img src={selectedFile} alt="" className="rounded-2xl
+                                    <Image src={selectedFile} alt="" className="rounded-2xl
                                 max-h-80 object-contain" />
                                 </div>
                             )}
@@ -133,7 +134,7 @@ function Modal() {
                                     <div className="text-[#6e767d] flex gap-x-3 relative">
                                         <span className="w-0.5 h-full z-[-1] absolute
                                         left-5 top-11 bg-gray-600"/>
-                                        <img src={post?.userImg} alt="" className="h-11 w-11 rounded-full"
+                                        <Image src={post?.userImg} alt="" className="h-11 w-11 rounded-full" width={30} height={30}
                                         />
                                         <div>
                                             <div className="inline-block group">
@@ -155,7 +156,7 @@ function Modal() {
                                     </div>
 
                                     <div>
-                                        <img src={session.user.image}
+                                        <Image src={session.user.image} width={30} height={30}
                                             className="h-11 w-11 rounded-full mt-10" alt="" />
                                         <div className="flex-grow mt-2">
                                             <textarea
