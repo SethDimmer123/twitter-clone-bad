@@ -50,14 +50,14 @@ function Modal() {
 
 
 
-    if (postId) {
+    // if (postId) {
         useEffect(() =>
             onSnapshot(doc(db, "posts", postId), (snapshot) => {
                 setPost(snapshot.data());
             }),
             [postId]
         );
-    }
+    // }
     console.log(post) //console.log to see error 
 
     const sendComment = async (e) => {
