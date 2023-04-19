@@ -10,7 +10,7 @@ function Login({ providers }) {
         width={150}
         height={150}
         objectFit="contain"
-        alt=""
+        alt="twitter profile pic"
       />
       <div>
         {Object.values(providers).map(provider => (
