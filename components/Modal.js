@@ -14,10 +14,13 @@ import { useSession } from "next-auth/react";
 import {
     EmojiHappyIcon,
     PhotographIcon,
+    CalendarIcon,
     XIcon,
 } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
 import Moment from "react-moment";
+import Picker from '@emoji-mart/react'
+// import 'emoji-mart/css/emoji-mart.css'
 
 function Modal() {
     const { data: session } = useSession();
@@ -31,11 +34,19 @@ function Modal() {
     const [comments, setComments] = useState("")
     const router = useRouter();
     const [selectedFile, setSelectedFile] = useState(null);
+    const [showEmojis, setShowEmojis] = useState(false)
     const filePickerRef = useRef(null)
 
-    const addImageToPost = () => {
+    const addImageToPost = () => { };
 
-    }
+
+    const addEmoji = (e) => {
+        let sym = e.unified.split("-");
+        let codesArray = [];
+        sym.forEach((el) => codesArray.push("0x" + el));
+        let emoji = String.fromCodePoint(...codesArray);
+        setInput(input + emoji);
+    };
 
 
 
@@ -73,7 +84,7 @@ function Modal() {
         //code below just animations from headless UI
         <Transition.Root show={isOpen} as={Fragment}>
             <Dialog as="div" className="fixed z-50 inset-0 pt-8" onClose={setIsOpen}>
-                <div className="flex items-start justify-center min-h-[800px] sm:min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div className="flex items-start justify-center max-h-[800px] sm:max-h-screen px-14 pt-[20px] text-center sm:block sm:p-0 sm:">
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
@@ -118,7 +129,7 @@ function Modal() {
                             <div>
 
                             </div>
-                            <div className="flex px-4 pt-5 pb-2.5 sm:px-6">
+                            <div className="flex px-2 pt-2 pb-2 sm:px-6">
                                 <div className="w-full">
                                     <div className="text-[#6e767d] flex gap-x-3 relative">
                                         <span className="w-0.5 h-full z-[-1] absolute
@@ -146,7 +157,7 @@ function Modal() {
 
                                     <div>
                                         <img src={session.user.image}
-                                            className="h-11 w-11 rounded-full mt-6" alt="" />
+                                            className="h-11 w-11 rounded-full mt-10" alt="" />
                                         <div className="flex-grow mt-2">
                                             <textarea
                                                 value={comments}
@@ -164,9 +175,11 @@ function Modal() {
                                                             {filePickerRef} hidden />
                                                     </div>
 
-                                                    <div className="icon">
+                                                    <div className="icon" onClick={() => setShowEmojis
+                                                        (!showEmojis)}>
                                                         <EmojiHappyIcon className="text-[#1d9bf0] h-[22px]" />
                                                     </div>
+
                                                 </div>
                                                 <button
                                                     className="bg-[#1d9bf0] text-white rounded-full px-4 py-1.5 font-bold shadow-md hover:bg-[#1a8cd8] disabled:hover:bg-[#1d9bf0] disabled:opacity-50 disabled:cursor-default"
@@ -183,6 +196,15 @@ function Modal() {
                             </div>
                         </div>
                     </Transition.Child>
+                </div>
+                <div className="absolute ml-[50%] ">
+                    
+                        {showEmojis && (
+                            <Picker
+                                onEmojiSelect={addEmoji}
+    
+                            />
+                        )}
                 </div>
             </Dialog>
         </Transition.Root>

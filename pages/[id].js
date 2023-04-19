@@ -41,7 +41,7 @@ function PostPage({ trendingResults, followResults, providers }) {
       onSnapshot(doc(db, "posts", id), (snapshot) => {
         setPost(snapshot.data());
       }),
-    [db]
+    [db,id]
   );
 
   useEffect(

@@ -21,13 +21,30 @@
     rounded-full transition ease-out;
   }
 
+  
+
   em-emoji-picker{
     position: absolute;
-    margin-top: 20px;
-    margin-left: -190px;
-    max-width: 320px;
+    margin-top: 10px;
+    margin-left:-190px;
+    max-width: -200px;
+    max-height: 40%;
   }
 
+}
 
+@media screen and (max-width: 280px){
+  em-emoji-picker{
+    display: none;
+  }
+}
 
+@media screen and (min-width:1024px) {
+  em-emoji-picker{
+    position: absolute;
+    margin-top: -40px;
+    margin-left:-190px;
+    max-width: -200px;
+    max-height: 40%;
+}
 }
